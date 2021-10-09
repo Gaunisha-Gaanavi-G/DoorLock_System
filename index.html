@@ -1,0 +1,210 @@
+<html lang="en">
+<head>
+    <script type="text/javascript" src="https://cloud.boltiot.com/static/js/boltCommands.js"></script>
+    <!-- <script type= "text/javascript">
+        setKey('{{ApiKey}}','{{Name}}');
+    </script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="changepwd submit-btn" onclick="changepwd()">Change Password</button>
+    <button class="forgotpwd submit-btn" onclick="forgotpwd()">Forgot Password</button>
+    <button class="goback submit-btn" onclick="goback()">Go Back</button>
+    <div class="container">
+        <div class="alert">ALERT WRONG PERSON!</div>
+        <div class="header">
+            <span>DOORLOCK SYSTEM</span>
+        </div>
+        <br>
+        <br>
+        <div class="enter-pwd">
+            Enter Password: 
+        </div>
+        <div class="text-box">
+            <input type="password" name="password" id="password"></input>
+            <button class="submit-btn" type="submit" onclick="submit()"> OPEN</button>
+        </div>
+        <div class="enter-pwd new-pwd">
+            Enter New Password: 
+        </div>
+        <div class="text-box new-pwd">
+            <input type="password" name="password" id="newpassword"></input>
+            <button class="submit-btn" type="submit" onclick="newpwd()">CHANGE</button>
+        </div>
+        <div class="dialpad">
+            <div class="row 1">
+                <span><button onclick="one()">1</button></span>
+                <span><button onclick="two()">2</button></span>
+                <span><button onclick="three()">3</button></span>
+            </div>
+            <div class="row 2">
+                <span><button onclick="four()">4</button></span>
+                <span><button onclick="five()">5</button></span>
+                <span><button onclick="six()">6</button></span>
+            </div>
+            <div class="row 3">
+                <span><button onclick="seven()">7</button></span>
+                <span><button onclick="eight()">8</button></span>
+                <span><button onclick="nine()">9</button></span>
+            </div>
+            <div class="row 4">
+                <span><button onclick="hash()">#</button></span>
+                <span><button onclick="zero()">0</button></span>
+                <span><button onclick="astrick()">*</button></span>
+            </div>
+        </div>
+        <div class="reset">
+            <button class="reset-btn" onclick = "reset()">RESET</button>
+        </div>
+        <br>
+        
+    </div>
+</body>
+<script type="text/javascript">
+    var password="123";
+    var pwd=document.getElementById("password");
+    document.getElementById("newpassword").addEventListener('focus', function(){
+        pwd=document.getElementById("newpassword");
+    });
+    document.getElementById("password").addEventListener('focus', function(){
+        pwd=document.getElementById("password");
+    });
+    pwd.style.color="white";
+    pwd.style.letterSpacing = "5px";
+    function reset(){
+        pwd.value = "";
+    }
+    function one(){
+        pwd.value+='1';
+    }
+    function two(){
+        pwd.value+='2';
+    }
+    function three(){
+        pwd.value+='3';
+    }
+    function four(){
+        pwd.value+='4';
+    }
+    function five(){
+        pwd.value+='5';
+    }
+    function six(){
+        pwd.value+='6';
+    }
+    function seven(){
+        pwd.value+='7';
+    }
+    function eight(){
+        pwd.value+='8';
+    }
+    function nine(){
+        pwd.value+='9';
+    }
+    function hash(){
+        pwd.value+='#';
+    }
+    function zero(){
+        pwd.value+='0';
+    }
+    function astrick(){
+        pwd.value+='*';
+    }
+    var count=3;
+    function submit(){
+        console.log(pwd.value);
+        if(pwd.value==password){
+            alert("Welcome!");
+            document.getElementsByClassName("header")[0].style.display="block";
+            document.getElementsByClassName("alert")[0].style.display="none";
+            document.getElementsByClassName("goback")[0].style.display="none";
+            document.getElementsByClassName("changepwd")[0].style.display="block";
+            
+        }
+        else{
+            count--;
+            if(count>0){
+                alert("Password is wrong! Try again! You have "+count+" chances left!");
+            }
+            else{
+                document.getElementsByClassName("header")[0].style.display="none";
+                document.getElementsByClassName("alert")[0].style.display="block";
+                document.getElementsByClassName("goback")[0].style.display="none";
+                document.getElementsByClassName("changepwd")[0].style.display="none";
+                $.ajax("https://api.telegram.org/bot2002066626:AAEktfQp098QqvFqY9kLw39McJWaZzCNvOs/sendMessage?chat_id=@DoorlockAlerts&text=ALERT!%20Your%20doorlock%20password%20has%20been%20entered%20wrong%20more%20than%203%20times.%20Please%20check!").done(function (response) {
+                  console.log(response);
+                }); 
+            }
+        }
+    }
+    function changepwd(){
+        document.getElementsByClassName("header")[0].innerHTML="CHANGE PASSWORD";
+        document.getElementsByClassName("submit-btn")[0].style.display="none";
+        document.getElementsByClassName("submit-btn")[3].style.display="none";
+        document.getElementsByClassName("alert")[0].style.display="none";
+        document.getElementsByClassName("new-pwd")[0].style.display="block";
+        document.getElementsByClassName("new-pwd")[1].style.display="block";
+        document.getElementsByClassName("enter-pwd")[0].innerHTML = "Enter Old Password:";
+        document.getElementsByClassName("goback")[0].style.display="block";
+    }
+    function goback(){
+        document.getElementsByClassName("header")[0].innerHTML="DOORLOCK SYSTEM";
+        document.getElementsByClassName("header")[0].style.display="block";
+        document.getElementsByClassName("submit-btn")[0].style.display="block";
+        document.getElementsByClassName("alert")[0].style.display="none";
+        document.getElementsByClassName("submit-btn")[3].style.display="inline";
+        document.getElementsByClassName("new-pwd")[0].style.display="none";
+        document.getElementsByClassName("new-pwd")[1].style.display="none";
+        document.getElementsByClassName("enter-pwd")[0].innerHTML = "Enter Password:";
+        document.getElementsByClassName("changepwd")[0].style.display="block";
+        document.getElementsByClassName("forgotpwd")[0].style.display="block";
+        document.getElementsByClassName("goback")[0].style.display="none";
+    }
+    var otp=Math.floor(Math.random() * (9999 - 1000)) + 1000;
+    
+    function forgotpwd(){
+        document.getElementsByClassName("header")[0].innerHTML="FORGOT PASSWORD";
+        document.getElementsByClassName("alert")[0].style.display="none";
+        document.getElementsByClassName("submit-btn")[3].style.display="none";
+        document.getElementsByClassName("new-pwd")[0].style.display="block";
+        document.getElementsByClassName("new-pwd")[1].style.display="block";
+        document.getElementsByClassName("enter-pwd")[0].innerHTML = "Enter OTP:";
+        document.getElementsByClassName("goback")[0].style.display="block";
+        document.getElementsByClassName("forgotpwd")[0].style.display="none";
+        document.getElementsByClassName("new-pwd")[0].style.display="block";
+        $.ajax("https://api.telegram.org/bot2002066626:AAEktfQp098QqvFqY9kLw39McJWaZzCNvOs/sendMessage?chat_id=@DoorlockAlerts&text=Here%20is%20your%20One%20Time%20Password%20for%20Doorlock%20System%20-%20"+otp+"%20.Please%20do%20not%20share%20this%20with%20anybody.%20This%20otp%20is%20valid%20for%203%20minutes.").done(function (response) {
+            console.log(response);
+        });
+    }
+    function newpwd(){
+        if(document.getElementsByClassName("header")[0].innerHTML=="FORGOT PASSWORD"){
+            var otp_from_user=document.getElementById("password").value;
+            if(otp==otp_from_user){
+                password=document.getElementById("newpassword").value;
+                alert("Password changed!");
+                $.ajax("https://api.telegram.org/bot2002066626:AAEktfQp098QqvFqY9kLw39McJWaZzCNvOs/sendMessage?chat_id=@DoorlockAlerts&text=PASSWORD%20CHANGED!%20Your%20doorlock%20password%20has%20been%20changed%20to%20"+password).done(function (response) {
+                    console.log(response);
+                });
+            }
+            else alert("OTP is wrong!");
+        }
+        else{
+            var old=document.getElementById("password").value;
+            if(password==old){
+                password=document.getElementById("newpassword").value;
+                alert("Password changed!");
+                $.ajax("https://api.telegram.org/bot2002066626:AAEktfQp098QqvFqY9kLw39McJWaZzCNvOs/sendMessage?chat_id=@DoorlockAlerts&text=PASSWORD CHANGED!%20Your%20doorlock%20password%20has%20been%20changed%20to%20"+password).done(function (response) {
+                    console.log(response);
+                });
+            } 
+            else alert("Old Password is Wrong!");
+        }
+        
+    }
+</script>
+</html>
