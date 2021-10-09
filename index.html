@@ -136,7 +136,8 @@
                 document.getElementsByClassName("alert")[0].style.display="block";
                 document.getElementsByClassName("goback")[0].style.display="none";
                 document.getElementsByClassName("changepwd")[0].style.display="none";
-                $.ajax("https://api.telegram.org/bot2002066626:AAEktfQp098QqvFqY9kLw39McJWaZzCNvOs/sendMessage?chat_id=@DoorlockAlerts&text=ALERT!%20Your%20doorlock%20password%20has%20been%20entered%20wrong%20more%20than%203%20times.%20Please%20check!").done(function (response) {
+                //you have to give your own bot id and chat id which you created
+                $.ajax("https://api.telegram.org/botbolt_id/sendMessage?chat_id=@chat_id&text=ALERT!%20Your%20doorlock%20password%20has%20been%20entered%20wrong%20more%20than%203%20times.%20Please%20check!").done(function (response) {
                   console.log(response);
                 }); 
             }
@@ -177,7 +178,8 @@
         document.getElementsByClassName("goback")[0].style.display="block";
         document.getElementsByClassName("forgotpwd")[0].style.display="none";
         document.getElementsByClassName("new-pwd")[0].style.display="block";
-        $.ajax("https://api.telegram.org/bot2002066626:AAEktfQp098QqvFqY9kLw39McJWaZzCNvOs/sendMessage?chat_id=@DoorlockAlerts&text=Here%20is%20your%20One%20Time%20Password%20for%20Doorlock%20System%20-%20"+otp+"%20.Please%20do%20not%20share%20this%20with%20anybody.%20This%20otp%20is%20valid%20for%203%20minutes.").done(function (response) {
+        //you have to give your own bot id and chat id which you created
+        $.ajax("https://api.telegram.org/botbot_id/sendMessage?chat_id=@chat_id&text=Here%20is%20your%20One%20Time%20Password%20for%20Doorlock%20System%20-%20"+otp+"%20.Please%20do%20not%20share%20this%20with%20anybody.%20This%20otp%20is%20valid%20for%203%20minutes.").done(function (response) {
             console.log(response);
         });
     }
@@ -187,7 +189,8 @@
             if(otp==otp_from_user){
                 password=document.getElementById("newpassword").value;
                 alert("Password changed!");
-                $.ajax("https://api.telegram.org/bot2002066626:AAEktfQp098QqvFqY9kLw39McJWaZzCNvOs/sendMessage?chat_id=@DoorlockAlerts&text=PASSWORD%20CHANGED!%20Your%20doorlock%20password%20has%20been%20changed%20to%20"+password).done(function (response) {
+                //you have to give your own bot id and chat id which you created
+                $.ajax("https://api.telegram.org/botbot_id/sendMessage?chat_id=@chat_id&text=PASSWORD%20CHANGED!%20Your%20doorlock%20password%20has%20been%20changed%20to%20"+password).done(function (response) {
                     console.log(response);
                 });
             }
@@ -198,7 +201,8 @@
             if(password==old){
                 password=document.getElementById("newpassword").value;
                 alert("Password changed!");
-                $.ajax("https://api.telegram.org/bot2002066626:AAEktfQp098QqvFqY9kLw39McJWaZzCNvOs/sendMessage?chat_id=@DoorlockAlerts&text=PASSWORD CHANGED!%20Your%20doorlock%20password%20has%20been%20changed%20to%20"+password).done(function (response) {
+                //you have to give your own bot id and chat id which you created
+                $.ajax("https://api.telegram.org/botbot_id/sendMessage?chat_id=@chat_id&text=PASSWORD CHANGED!%20Your%20doorlock%20password%20has%20been%20changed%20to%20"+password).done(function (response) {
                     console.log(response);
                 });
             } 
